@@ -1,0 +1,34 @@
+$icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+$fa-font-path: "/bower_components/font-awesome/fonts";
+
+@import 'bootstrap-sass-official/assets/stylesheets/bootstrap';
+@import 'font-awesome/scss/font-awesome';
+
+/**
+ * App-wide Styles
+ */
+
+// Hack: to resolve incorrect highcharts sizing in hidden tabs
+.tab-content {
+    position: relative;
+    > .tab-pane {
+        width: 100%;
+        position:absolute;
+        display:block !important;
+        left: -9000px;
+        &.active {
+            position: static;
+            left: 0;
+        }
+    }
+}
+
+// Component styles are injected through grunt
+// injector
+@import 'about/about.scss';
+@import 'main/main.scss';
+@import 'ssDebug/ssDebug.scss';
+@import 'ssSelect/ssSelect.scss';
+@import 'ssTable/ssTable.directive.scss';
+@import 'modal/modal.scss';
+// endinjector

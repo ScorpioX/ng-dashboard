@@ -1,0 +1,146 @@
+mixin tab(heading)
+  tab(heading=heading)
+    .panel.panel-default
+      .panel-body
+        block
+mixin navForm
+  .navbar.navbar-default
+    .navbar-form
+      block
+
+div(ng-include='"components/navbar/navbar.html"')
+
+header#banner.hero-unit
+  .container
+    h1 'Allo, 'Allo!
+    h1
+      i.fa.fa-dashboard
+      = ' '
+      i.fa.fa-area-chart
+      = ' '
+      i.fa.fa-bar-chart
+      = ' '
+      i.fa.fa-line-chart
+    p.lead Your next dashboard just a few tags away!
+
+.container
+
+  h2.page-header Features:
+
+  tabset
+    +tab('SS-AJAX')
+      h3 Usage
+      p Ajax load data from server side,
+        = ' '
+        a(href="http://enable-cors.org/") CORS
+        = ' supported!'
+      h3 Example
+      pre='<ss-ajax uri="/api/things" target="things"></ss-ajax>'
+      ss-ajax(uri="/api/things" target="things")
+      pre.output things={{things}}
+    +tab('SS-TABLE')
+      h3 Usage
+      p Display object array in tabular format.
+      h3 Example
+      pre='<ss-ajax uri="/api/things" target="things"></ss-ajax>\n<ss-table data="things"></ss-table>'
+      ss-table(data="things")
+      h3 Example: Customize Columns and Order
+      pre='<ss-table data="things" cols="info,name"></ss-table>'
+      ss-table(data="things" cols="info,name")
+    +tab('SS-CSV')
+      h3 Usage
+      p Provide CSV export of object array.
+      h3 Example
+      pre='<ss-csv name="things" data="things"></ss-csv>\n<ss-table data="things"></ss-table>'
+      ss-csv(name="things" data="$parent.things")
+      ss-table(data="things")
+    +tab('SS-SELECT')
+      h3 Usage
+      p Button group for single or multiple selections.
+      h3 Example: Inline Options
+      pre='<ss-select label="Single"   options="[{key:"A",value:1},{key:"B",value:2},{key:"C",value:3}]" ng-model="options.ABC"></ss-select>'
+      pre='<ss-select label="Multiple" options="[{key:"X",value:1},{key:"Y",value:2},{key:"Z",value:3}]" ng-model="options.XYZ" multiple></ss-select>'
+      +navForm
+        ss-select(label="Single" options="[{key:'A',value:1},{key:'B',value:2},{key:'C',value:3}]" ng-model="options.ABC")
+        ss-select(label="Multiple" options="[{key:'X',value:1},{key:'Y',value:2},{key:'Z',value:3}]" ng-model="options.XYZ" multiple)
+        pre.output {{options}}
+      h3 Example: Loaded Options
+      pre='<ss-ajax uri="/api/options/C" target="CC"></ss-ajax>\n<ss-select label="Loaded" options-ref="CC" ng-model="options.C"></ss-select>'
+      +navForm
+        ss-select(label="Loaded" options-ref="CC" ng-model="options.C")
+        pre.output.
+          Loaded Options: {{CC}}
+          Selected Option: {{options.C}}
+
+      h3 Example: Custom Objects as Options
+      pre='<ss-select label="User" options="[{name:"Tom",age:19},{name:"Jerry",age:20},{name:"Susan",age:21}]" kv="name:age" ng-model="options.user"></ss-select>'
+      +navForm
+        ss-select(label="User" options="[{name:'Tom',age:19},{name:'Jerry',age:20},{name:'Susan',age:21}]" kv="name:age" ng-model="options.user")
+        pre.output Chosen Value: {{options.user}}
+    +tab('SS-DATE')
+      h3 Usage
+      p Date picker with customizable
+        = ' '
+        a(href="http://angular-ui.github.io/bootstrap/#/datepicker") display formats
+        = ' and '
+        a(href="http://momentjs.com/docs/#/displaying/format/") output formats.
+      h3 Example: Output UNIX Timestamp by Default
+      pre='<ss-date label="Start" ng-model="myDate"></ss-date>'
+      +navForm
+        ss-date(label="My date" ng-model="myDate")
+        pre.output myDate={{myDate}}
+      h3 Example: Custom Display &amp; Output Format
+      pre='<ss-date label="End" ng-model="endDate" format="yyyy/MM/dd" model-format="YYYY-MM-DD"></ss-date>'
+      +navForm
+        ss-date(label="End" ng-model="endDate" format="yyyy/MM/dd" model-format="YYYY-MM-DD")
+        pre.output startDate={{endDate}}
+      h3 Example: Set Earlier Date
+      pre='<ss-date label="Start" ng-model="endDate" subtract="30,days" model-format="YYYY-MM-DD"></ss-date>'
+      +navForm
+        ss-date(label="Start" ng-model="startDate" subtract="30,days" model-format="YYYY-MM-DD")
+        pre.output startDate={{startDate}} endDate={{endDate}}
+    +tab('SS-HIGHCHARTS')
+      h3 Usage
+      p Display TIME-SERIES data in various
+        = ' '
+        a(href="http://www.highcharts.com/") highcharts
+        = ' formats.'
+      h3 Example
+      pre='<ss-highcharts type="line"   title="Line Chart"   series="series1"></ss-highcharts>'
+      pre='<ss-highcharts type="bar"    title="Bar Chart"    series="series1"></ss-highcharts>'
+      pre='<ss-highcharts type="column" title="column Chart" series="series1"></ss-highcharts>'
+      .row
+        ss-highcharts.col-md-4(type="line"   title="Line Chart"   series="series1")
+        ss-highcharts.col-md-4(type="bar"    title="Bar Chart"    series="series1")
+        ss-highcharts.col-md-4(type="column" title="column Chart" series="series1")
+      pre.output series1={{series1}}
+    +tab('SS-CSV-HIGHCHARTS')
+      h3 Usage
+      p Export multiple highcharts TIME-SERIES data in CSV format, timestamps combined.
+      h3 Example
+      pre='<ss-csv-highcharts name="series1" data="series1"></ss-csv-highcharts>\n<ss-highcharts type="line" title="Line Chart" series="series1"></ss-highcharts>'
+      ss-csv-highcharts(name="series1" data="series1")
+      ss-highcharts(type="line" title="Line Chart" series="series1")
+    +tab('SS-TABLE-HIGHCHARTS')
+      h3 Usage
+      p Display multiple highcharts TIME-SERIES data in tabular format, timestamps combined.
+      h3 Example
+      pre='<ss-highcharts type="line" title="Line Chart" series="series1"></ss-highcharts>\n<ss-table-highcharts series="series1"></ss-table-highcharts>'
+      ss-highcharts(type="line" title="Line Chart" series="series1")
+      ss-table-highcharts(series="series1")
+    +tab('SS-DEBUG')
+      h3 Usage
+      p Simple means to reveal scope members, just mouse over the
+        = ' '
+        span.glyphicon.glyphicon-eye-open
+        = ' icon.'
+      h3 Example
+      pre='<ss-debug></ss-debug>'
+      ss-debug
+
+footer.footer
+  .container
+    h3
+      a(href='https://github.com/ScorpioX') @scorpiox
+      = ' | '
+      a(href='https://github.com/ScorpioX/ng-dashboard/issues?state=open') Issues

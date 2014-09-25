@@ -1,0 +1,28 @@
+.debug {
+	position: relative;
+	overflow:visible;
+
+	.info {
+		text-align: left;
+		color:#333;
+		width:600px;
+		display:none;
+		position:absolute;
+		left:5px;
+		top:5px;
+		z-index:9999;
+
+		tbody {
+			background:#ffc;
+		}
+		pre {
+			margin: 0;
+			padding: 3px;
+			width:600px;
+		}
+	}
+
+	:hover .info {
+		display:block;
+	}
+}

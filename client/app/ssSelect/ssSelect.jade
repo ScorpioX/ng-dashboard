@@ -1,0 +1,28 @@
+.form-group(ng-switch="mode")
+	label.ss-group {{label}}
+
+	//-Button Single
+	.btn-group.btn-group-sm(ng-switch-when="BS")
+		button.btn.btn-default.ss-radio(type="button" class="{{isActive(opt.value)}}" ng-repeat="opt in _options" ng-click="setSingle(opt.value)") {{opt.key}}
+
+	//-Button Multiple
+	.btn-group.btn-group-sm(ng-switch-when="BM")
+		button.btn.btn-default.ss-checkbox(type="button" class="{{isActive(opt.value)}}" ng-repeat="opt in _options" ng-click="setOption(opt.value)") {{opt.key}}
+
+	//-Select Single
+	div(ng-switch-when="SS")
+		ui-select(ng-model="$parent.$parent.selected" theme="bootstrap")
+			ui-select-match.btn-sm(placeholder="..." style="width:174px") {{$select.selected.key}}
+			ui-select-choices(repeat="opt in _options | filter: $select.search")
+				div(ng-bind-html="opt.key | highlight: $select.search")
+
+	//-Select Multiple
+	.btn-group.btn-group-sm(ng-switch-when="SM")
+		button.btn.btn-default.ss-checkbox(type="button" class="{{isActive(opt.value)}}" ng-repeat="opt in _options" ng-click="setOption(opt.value)") {{opt.key}}
+	//- div(ng-switch-when="SM")
+	//- 	ui-select(multiple ng-model="$parent.$parent.selected" theme="bootstrap")
+	//- 		ui-select-match(placeholder="...") {{$item.key}}
+	//- 		ui-select-choices(repeat="opt.key as opt in _options | filter: {key: $select.search}")
+	//- 			div(ng-bind-html="opt.key | highlight: $select.search")
+
+= ' '
