@@ -10,6 +10,9 @@ Just two tags to render a dynamic chart on screen!
 <ss-highcharts title="My Chart" series="series1"></ss-highcharts>
 ```
 ### Tryout Demo App
+Open [scorpiox.github.io/ng-dashboard/](http://scorpiox.github.io/ng-dashboard/) or
+
+### Play the Source
 * Install [node.js](http://nodejs.org/)
 * `git clone https://github.com/ScorpioX/ng-dashboard.git`
 * `npm install -g bower`
