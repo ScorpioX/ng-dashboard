@@ -6,14 +6,14 @@ angular.module('ngDashboardApp').directive('ssTable', function () {
 			cols: '@',
 			data: '='
 		},
-		template: '<div ng-if="ready" class="grid" ng-grid="tableOptions"></div>',
+		template: '<div ng-if="ready" class="grid" ui-grid="tableOptions" ui-grid-auto-resize></div>',
 		restrict: 'E',
 		link: function (scope, element, attrs) {
 			if (!scope.data) {
 				scope.data = [];
 			}
 			scope.tableOptions = {
-				data: 'data',
+				data: null,
 				enableHighlighting: true,
 				enableRowSelection: true,
 				multiSelect: false
@@ -25,6 +25,7 @@ angular.module('ngDashboardApp').directive('ssTable', function () {
 			}
 			scope.$watch('data', function (data) {
 				if (data && data.length) {
+					scope.tableOptions.data = data;
 					scope.ready = 1;
 				}
 			});

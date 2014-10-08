@@ -39,13 +39,11 @@ angular.module('ngDashboardApp').directive('ssSelect', ['$parse', function ($par
 					var opt = scope._options[0], val = opt.value;
 					scope.ngModel = [val];
 					valueMap[val] = 1;
-					scope.selected = isMulti ? [opt] : opt;
+					scope.selected = isMulti ? [opt.value] : opt;
 				} else {
 					//There're predefined values
 					if (isMulti) {
-						scope.selected = _.map(scope.ngModel, function (m) {
-							return _.find(scope._options, function(opt) { return opt.value === m; });
-						});
+						scope.selected = scope.ngModel;
 					} else {
 						scope.selected = _.find(scope._options, function(opt) { return opt.value === scope.ngModel[0]; });
 					}
@@ -66,7 +64,7 @@ angular.module('ngDashboardApp').directive('ssSelect', ['$parse', function ($par
 			//For <ui-select>
 			scope.$watch('selected', function (sels) {
 				if (sels) {
-					scope.ngModel = isMulti ? _.pluck(sels, 'value') : [sels.value];
+					scope.ngModel = isMulti ? sels : [sels.value];
 				}
 			});
 

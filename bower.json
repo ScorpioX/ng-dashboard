@@ -14,8 +14,8 @@
     "lodash": "~2.4.1",
     "angular-ui-router": "~0.2.10",
     "moment": "~2.8.3",
-    "angular-ui-select": "~0.7.0",
-    "ng-grid": "~2.0.13",
+    "angular-ui-select": "~0.8.0",
+    "angular-ui-grid": "~3.0.0-rc.11",
     "highstock-release": "~2.0.4"
   },
   "devDependencies": {

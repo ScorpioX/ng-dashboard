@@ -4,7 +4,7 @@ angular.module('ngDashboardApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngGrid',
+  'ui.grid',
   'ui.router',
   'ui.bootstrap',
   'ui.select'

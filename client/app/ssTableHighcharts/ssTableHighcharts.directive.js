@@ -5,14 +5,13 @@ angular.module('ngDashboardApp').directive('ssTableHighcharts', function ($timeo
 		scope: {
 			series: '='
 		},
-		template: '<div class="grid" ng-if="ready" ng-grid="tableOptions"></div>',
+		template: '<div class="grid" ng-if="ready" ui-grid="tableOptions"></div>',
 		restrict: 'E',
 		link: function (scope, element, attrs) {
 			var timer;
 
 			scope.tableOptions = {
 				columnDefs: null,
-				data: 'data',
 				enableHighlighting: true,
 				enableRowSelection: true,
 				multiSelect: false
@@ -42,7 +41,7 @@ angular.module('ngDashboardApp').directive('ssTableHighcharts', function ($timeo
 						rowMap[ts][name] = y;
 					});
 				});
-				scope.data = _.values(rowMap);
+				scope.tableOptions.data = _.values(rowMap);
 
 				$timeout.cancel(timer);
 				timer = $timeout(function () {
